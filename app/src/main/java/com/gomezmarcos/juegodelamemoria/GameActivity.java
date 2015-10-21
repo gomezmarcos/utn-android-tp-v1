@@ -24,6 +24,8 @@ public class GameActivity extends ActionBarActivity {
     Button firstGuess = null;
     Button secondGuess = null;
     int guessed=0;
+    int lifes=3;
+    String timeSpent="00:00";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class GameActivity extends ActionBarActivity {
         addButtonToBoard(R.drawable.img_6);
 
         Collections.shuffle(elements);
+
         for(Button b: elements){
             board.addView(b);
         }
@@ -81,7 +84,11 @@ public class GameActivity extends ActionBarActivity {
                         if (guessed == 6)
                             Toast.makeText(GameActivity.this,"GANASTE EL JUEGO",Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(GameActivity.this, "Son distintos burrito!", Toast.LENGTH_SHORT).show();
+                        if(--lifes == 0)
+                            Toast.makeText(GameActivity.this,"PERDISTE EL JUEGO",Toast.LENGTH_LONG).show();
+                        else
+                            Toast.makeText(GameActivity.this, "Son distintos burrito!", Toast.LENGTH_SHORT).show();
+
                         firstGuess.setBackgroundResource(R.drawable.question_icon);
                         secondGuess.setBackgroundResource(R.drawable.question_icon);
                     }
